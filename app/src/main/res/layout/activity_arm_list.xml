@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/agv_list_bg"
+    tools:context="com.kevin.armcontrolsforwireless.activity.ArmListActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/llBtnMain"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnSearchAgv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/btn_search_bg"
+                android:text="搜索"
+                android:textColor="#464646" />
+
+            <Button
+                android:id="@+id/btnConnectAgv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/btn_connect_bg"
+                android:text="连接"
+                android:textColor="#464646" />
+
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/lvAgv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/llBtnMain"
+            android:layout_alignParentTop="true"
+            android:animateLayoutChanges="true"
+            android:divider="#00000000"
+            android:listSelector="#00000000" />
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

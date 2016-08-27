@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#FFC107</color>
+    <color name="colorPrimary2">#10058043</color>
+    <color name="colorPrimaryDark">#FFA000</color>
+    <color name="colorMainBackground">#6bc133</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="toastTextColor">#ffffff</color>
+    <color name="toastBg">#30000000</color>
+    <color name="WhiteColor">#FFFFFF</color>
+
+    <!--按钮圆边-->
+    <color name="colorBtnUnlockEdge">#FFF12F</color>
+    <!--按钮按下颜色-->
+    <color name="colorBtnUnlockPress">#B6B6B6</color>
+    <!--按钮默认颜色-->
+    <color name="colorBtnUnlockUnPress">#4fe659</color>
+
+    <!--侧边标题颜色-->
+    <color name="colorSlideTitle">#4fe659</color>
+
+    <!--侧边内容颜色-->
+    <color name="colorSlideContent">#FFFFFF</color>
+
+    <!--agv搜索列表背景-->
+    <color name="colorAgvListBg">#4fe659</color>
+
+    <!--机械臂控制界面按钮和边框颜色-->
+    <color name="colorArmControlBg">@color/colorBtnUnlockEdge</color>
+
+    <!--机械臂控制界面按钮和边框颜色按下-->
+    <color name="colorArmControlBgPress">@color/colorPrimary</color>
+
+    <!--机械臂动作按钮上的文字颜色-->
+    <color name="btnTextColor">#464646</color>
+
+</resources>

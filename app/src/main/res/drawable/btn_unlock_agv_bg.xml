@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item>
+        <shape android:shape="rectangle">
+            <corners android:radius="120dp" />
+            <solid android:color="@color/colorBtnUnlockEdge" />
+            <size
+                android:width="200dp"
+                android:height="200dp" />
+        </shape>
+    </item>
+    <!--aee081  4fe659   @color/colorPrimary-->
+    <!--FFF12F   e66b4f   f3876f-->
+    <item
+        android:bottom="8dp"
+        android:left="8dp"
+        android:right="8dp"
+        android:top="8dp">
+        <selector xmlns:android="http://schemas.android.com/apk/res/android">
+            <item android:state_pressed="true">
+                <shape android:shape="rectangle">
+                    <corners android:radius="120dp" />
+                    <gradient
+                        android:centerColor="#0f591b"
+                        android:endColor="#8f8b8b"
+                        android:gradientRadius="120dp"
+                        android:startColor="#787474"
+                        android:type="radial"
+                        android:useLevel="false"
+                        />
+                    <size
+                        android:width="192dp"
+                        android:height="192dp" />
+                </shape>
+            </item>
+
+            <item>
+                <shape android:shape="rectangle">
+                    <corners android:radius="120dp" />
+                    <gradient
+
+                        android:centerColor="#1db937"
+                        android:endColor="#121212"
+                        android:gradientRadius="120dp"
+                        android:startColor="#121212"
+                        android:type="radial"
+                        android:useLevel="false"
+                         />
+                    <size
+                        android:width="192dp"
+                        android:height="192dp" />
+                </shape>
+            </item>
+
+        </selector>
+    </item>
+
+</layer-list>

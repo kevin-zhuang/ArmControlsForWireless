@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/agv_list_bg"
+    tools:context="com.kevin.armcontrolsforwireless.activity.SmartLinkActivity">
+
+    <ProgressBar
+
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:max="100" />
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/progressBar"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin">
+
+        <TextView
+            android:id="@+id/tvShowCurrentWifi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:text="wifi"
+            android:textColor="#1218c4"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/btnSettingWifi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/tvShowCurrentWifi"
+            android:layout_toRightOf="@+id/tvShowCurrentWifi"
+            android:text="设置wifi？"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:id="@+id/pwLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvShowCurrentWifi"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+
+            >
+
+            <EditText
+                android:id="@+id/etSSIDPW"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="请输入wifi密码"
+                android:inputType="textPassword" />
+
+            <CheckBox
+                android:id="@+id/cbShowPw"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="显示密码" />
+
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/pwLayout"
+            >
+
+            <Button
+                android:id="@+id/btnStart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/btn_bg"
+                android:paddingBottom="4dp"
+                android:text="START" />
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

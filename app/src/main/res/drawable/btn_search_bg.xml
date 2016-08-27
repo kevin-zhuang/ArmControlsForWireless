@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item>
+        <shape android:shape="rectangle">
+            <corners
+                android:bottomRightRadius="0dp"
+                android:radius="4dp"
+                android:topRightRadius="0dp" />
+            <solid android:color="#FFF12F" />
+            <size
+                android:width="90dp"
+                android:height="40dp" />
+        </shape>
+    </item>
+    <!--aee081  4fe659   @color/colorPrimary-->
+    <!--FFF12F   e66b4f   f3876f-->
+    <item
+        android:bottom="4dp"
+        android:left="4dp"
+        android:right="0dp"
+        android:top="4dp">
+        <selector xmlns:android="http://schemas.android.com/apk/res/android">
+            <item android:state_pressed="true">
+                <shape android:shape="rectangle">
+                    <corners
+                        android:bottomRightRadius="0dp"
+                        android:radius="4dp"
+                        android:topRightRadius="0dp" />
+                    <solid android:color="#4fe659" />
+                    <size
+                        android:width="82dp"
+                        android:height="22dp" />
+                </shape>
+            </item>
+
+            <item>
+                <shape android:shape="rectangle">
+                    <corners
+                        android:bottomRightRadius="0dp"
+                        android:radius="4dp"
+                        android:topRightRadius="0dp" />
+                    <solid android:color="@color/colorPrimary" />
+                    <size
+                        android:width="82dp"
+                        android:height="22dp" />
+                </shape>
+            </item>
+
+        </selector>
+    </item>
+
+</layer-list>
