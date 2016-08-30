@@ -101,7 +101,8 @@ public class Util {
      */
     public static boolean checkData(String data) {
         if (data.length() >= 4) {
-            // 数据头ffaa
+            // 数据头ffaa //FF AA 1D 81 00 00 00 01 0C 00 00 00 00 00 05 E9 85 7F CF 5C 00 00 00 FF 55
+
             if ("FF".equalsIgnoreCase(data.substring(0, 2))
                     && "AA".equalsIgnoreCase(data.substring(2, 4))) {
                 if (data.length() >= 26) {

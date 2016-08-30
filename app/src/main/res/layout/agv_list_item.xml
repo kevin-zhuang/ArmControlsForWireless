@@ -42,7 +42,7 @@
 
         <TextView
             android:id="@+id/tvShowAgvId"
-            android:text="agvID :"
+            android:text="机械臂ID :"
             android:layout_marginTop="40dp"
             android:layout_marginLeft="10dp"
             android:layout_marginStart="10dp"

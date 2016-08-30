@@ -68,7 +68,7 @@ public class ArmListActivity extends AppCompatActivity implements View.OnClickLi
         btnConnectAgv = (Button) findViewById(R.id.btnConnectAgv);
         btnSearchAgv.setOnClickListener(this);
         btnConnectAgv.setOnClickListener(this);
-
+        armList = dbCurd.getAllTempAgvData();
         lvAgv = (ListView)findViewById(R.id.lvAgv);
         armAdapter = new ArmAdapter(this,armList);
         lvAgv.setAdapter(armAdapter);
@@ -134,6 +134,7 @@ public class ArmListActivity extends AppCompatActivity implements View.OnClickLi
                     @Override
                     public void onReceiveData(byte[] data, int len, String remoteIp) {
                         String da = Util.bytes2HexString(data, len);
+                        Log.e("ArmListActivity","data="+da);
                         analysisData(da, remoteIp);
                     }
                 });
@@ -183,8 +184,9 @@ public class ArmListActivity extends AppCompatActivity implements View.OnClickLi
         }
     }
 
+
     private void analysisData(String data, String ip) {
-        if (Util.checkData(data)&&data.length() == 34) {
+        if (Util.checkData2(data)&&data.length() == 50) {
             String cmd = data.substring(12,16);
             if (Constant.CMD_SEARCH_RESPOND.equalsIgnoreCase(cmd)) {
                 String armId = data.substring(4, 8);

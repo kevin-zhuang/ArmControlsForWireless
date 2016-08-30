@@ -96,7 +96,7 @@ public class SmartLinkActivity extends AppCompatActivity {
 
     //第二次udp2
     private static final String udp2Ip = "255.255.255.255";
-    private static final String udp2Port = "5678";//默认5678
+    private static final String udp2Port = "5679";//默认5678
     private InetAddress secondUdpInetAddress;//第2次的udp2
     private DatagramSocket secondUdpSocket;//第2次udp1 secondUdpSocket
     private boolean secondUdpRevWhile = false;//第2次udp2
@@ -125,6 +125,9 @@ public class SmartLinkActivity extends AppCompatActivity {
     private static final String BUTTON_STRING_START = "START";
     private static final String BUTTON_STRING_STOP = "STOP";
 
+    private static final int FIRST_SEND_TIMES = 4;
+    private static final int SECOND_SEND_TIMES = 16;
+
     //数据处理
     private byte[] dataHead = {(byte) 0xFF, (byte) 0xAA};// 0、1
     private byte[] dataID = {(byte) 0x11, (byte) 0x12, (byte) 0x13,
@@ -133,10 +136,14 @@ public class SmartLinkActivity extends AppCompatActivity {
     private byte[] dataTail = {(byte) 0xFF, (byte) 0x55}; // dataContext.length
 
     // 广播的数据
+//    private byte[] seek = {(byte) 0xff, (byte) 0xaa, (byte) 0x00, (byte) 0x00,
+//            (byte) 0x00, (byte) 0x00, (byte) 0x00, (byte) 0x00, (byte) 0x00,
+//            (byte) 0x00, (byte) 0x01, (byte) 0x00, (byte) 0x00, (byte) 0x00, (byte) 0x00, (byte) 0xff,
+//            (byte) 0x55};
+
     private byte[] seek = {(byte) 0xff, (byte) 0xaa, (byte) 0x00, (byte) 0x00,
-            (byte) 0x00, (byte) 0x00, (byte) 0x00, (byte) 0x00, (byte) 0x00,
-            (byte) 0x00, (byte) 0x01, (byte) 0x00, (byte) 0x00, (byte) 0x00, (byte) 0x00, (byte) 0xff,
-            (byte) 0x55};
+            (byte) 0x00, (byte) 0x00, (byte) 0x01, (byte) 0x00, (byte) 0x00,
+            (byte) 0x00, (byte) 0x00,(byte) 0xff, (byte) 0x55};
 
     private String mac = "";
     private MyHandler myHandler;
@@ -663,8 +670,9 @@ public class SmartLinkActivity extends AppCompatActivity {
                         firstUdpSocket.receive(firstDataPacket);
                         int len = firstDataPacket.getLength();
                         if (len > 0) {
-                            Log.e("Main", "getSocketAddress=" + firstDataPacket.getSocketAddress() + " getAddress=" + firstDataPacket.getAddress());
+                            Log.e(TAG, "getSocketAddress=" + firstDataPacket.getSocketAddress() + " getAddress=" + firstDataPacket.getAddress());
                             String receiveStr = bytes2HexString(firstUdpReceiveByte, len);
+                            Log.e(TAG,"receiveStr="+receiveStr);
                             if (doWithFirstUdpRvData(receiveStr)) {
                                 firstUdpRevWhile = false;
                                 firstUdpHandler.removeCallbacks(firstUdpRunnable);
@@ -703,7 +711,7 @@ public class SmartLinkActivity extends AppCompatActivity {
                 Log.e(TAG, "定时发送firstUdpSendCount=" + firstUdpSendCount);
 
                 firstUdpHandler.postDelayed(firstUdpRunnable, 1000);
-                if (firstUdpSendCount > 3) {
+                if (firstUdpSendCount > FIRST_SEND_TIMES) {
                     firstUdpHandler.removeCallbacks(firstUdpRunnable);
 
                 }
@@ -739,8 +747,8 @@ public class SmartLinkActivity extends AppCompatActivity {
             @Override
             public void run() {
                 while (!firstUdpBreakDOwhile) {
-                    if (firstUdpSendCount == 4) {
-                        Log.e(TAG, "已经发送3次");
+                    if (firstUdpSendCount == FIRST_SEND_TIMES) {
+                        Log.e(TAG, "已经发送"+FIRST_SEND_TIMES+"次");
                         firstUdpRevWhile = false;//关掉udp1的socket的接收while
                         connFirstWifi(currentWifi);//连接之前的wifi
                         if (firstUdpSocket != null) {
@@ -821,13 +829,7 @@ public class SmartLinkActivity extends AppCompatActivity {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-//                    finally {
-//                        Log.e(TAG, "第2次udp接收后的finally，关闭socket222");
-//                        if(secondUdpSocket!=null){
-//                            secondUdpSocket.close();
-//                        }
-//
-//                    }
+
                 }
 
             }
@@ -844,7 +846,7 @@ public class SmartLinkActivity extends AppCompatActivity {
                 secondUdpSendCount++;
                 Log.e(TAG, "定时发送firstUdpSendCount222=" + secondUdpSendCount);
                 secondUdpHandler.postDelayed(secondUdpRunnable, 1000);
-                if (secondUdpSendCount > 11) {
+                if (secondUdpSendCount > SECOND_SEND_TIMES) {
                     secondUdpHandler.removeCallbacks(secondUdpRunnable);
                 }
             }
@@ -879,8 +881,8 @@ public class SmartLinkActivity extends AppCompatActivity {
             @Override
             public void run() {
                 while (!secondUdpBreakDOwhile) {
-                    if (secondUdpSendCount == 11) {
-                        Log.e(TAG, "已经发送11次");
+                    if (secondUdpSendCount == SECOND_SEND_TIMES) {
+                        Log.e(TAG, "已经发送"+SECOND_SEND_TIMES+"次");
                         secondUdpRevWhile = false;//关掉udp1的socket的接收while
                         secondUdpHandler.removeCallbacks(secondUdpRunnable);
                         if (secondUdpSocket != null) {
@@ -988,7 +990,7 @@ public class SmartLinkActivity extends AppCompatActivity {
 
     }
 
-
+//FF AA 1D 81 00 00 00 01 0C 00 00 00 00 00 05 E9 85 7F CF 5C 00 00 00 FF 55
     //第二次udp数据处理
     private boolean doWithSecondUdpRvData(String data) {
         boolean isTrue = false;
@@ -997,9 +999,9 @@ public class SmartLinkActivity extends AppCompatActivity {
                     && "AA".equals(data.substring(2, 4))) {
                 // 01 10
                 if (data.length() > 24) {
-                    if ("01".equals(data.substring(20, 22))
-                            && "10".equals(data.substring(22, 24))) {
-                        if (mac.equals(data.substring(4, 20))) {
+                    if ("00".equals(data.substring(12, 14))
+                            && "01".equals(data.substring(14, 16))) {
+                        if (mac.equals(data.substring(28, 44))) {
                             isTrue = true;
                             //数据头 mac 命令类型 数据长度 校验码 数据尾
 //                            FFAA 5634001900000000 0110 2A00 2E1600000A05FFFE0000 0000000000000000C3C5 B4C5B4B0B4C5CFB5CDB3 00000000000000000000 0000 32 FF55
